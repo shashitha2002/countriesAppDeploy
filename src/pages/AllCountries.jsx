@@ -75,40 +75,41 @@ export const AllCountries = () => {
 
   return (
     <>
-      <Header regions={regions} languages={languages} />
+  <Header regions={regions} languages={languages} />
 
-      <HStack spacing={4} p={4} bg="white" alignItems="center">
-        <Box px={4} py={2} w="100%" bg="white">
-          <Input
-            placeholder="Search The Country"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            size="lg"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                fetchCountries(searchTerm);
-              }
-            }}
-          />
-        </Box>
-        <Button
-          px={4}
-          py={2}
-          bg="#1CA03D"
-          borderRadius="md"
-          boxShadow="md"
-          _hover={{ boxShadow: "xl", transform: "scale(1.02)" }}
-          transition="all 0.2s"
+  <Box pt={{ base: "80px", md: "90px" }}>
+    <HStack spacing={4} p={4} bg="white" alignItems="center">
+      <Box px={4} py={2} w="100%" bg="white">
+        <Input
+          placeholder="Search The Country"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          size="lg"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              fetchCountries(searchTerm);
+            }
+          }}
+        />
+      </Box>
+      <Button
+        px={4}
+        py={2}
+        bg="#1CA03D"
+        borderRadius="md"
+        boxShadow="md"
+        _hover={{ boxShadow: "xl", transform: "scale(1.02)" }}
+        transition="all 0.2s"
+        onClick={() => fetchCountries(searchTerm)}
+      >
+        <FaSearchLocation size={24} color="white" />
+      </Button>
+    </HStack>
 
-          onClick={() => fetchCountries(searchTerm)}
-        >
-          <FaSearchLocation size={24} color="white" />
-        </Button>
-      </HStack>
-
-      <Stack spacing={4} p={4}>
-        {loading ? <Loader /> : <CountryCard countries={countries} />}
-      </Stack>
-    </>
+    <Stack spacing={4} p={4}>
+      {loading ? <Loader /> : <CountryCard countries={countries} />}
+    </Stack>
+  </Box>
+</>
   );
 };

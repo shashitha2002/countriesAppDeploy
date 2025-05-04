@@ -82,39 +82,50 @@ const Header = (props) => {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      height="90px"
+      height={{ base: "70px", md: "90px" }}
       backgroundColor="white"
       color="black"
+      px={{ base: 2, md: 4 }}
+      flexWrap="wrap"
+      gap={2}
     >
-      <Box display="flex" alignItems="center" pl="3" gap="3">
-        <Image src={myImage} height="60px" />
+      <Box display="flex" alignItems="center" pl={{ base: 1, md: 3 }} gap={{ base: 2, md: 4 }}>
+        <Image src={myImage} height={{ base: "40px", md: "60px" }} />
         {user?.email && (
           <Box textAlign="left">
-            <Text fontSize="sm" color="gray.500">
+            <Text fontSize={{ base: "xs", md: "sm" }} color="gray.500">
               Signed in as
             </Text>
-            <Text fontWeight="bold">{user.email}</Text>
+            <Text fontWeight="bold" fontSize={{ base: "sm", md: "md" }}>
+              {user.email}
+            </Text>
           </Box>
         )}
       </Box>
 
-      <Stack direction="row" spacing={4} pr="3">
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        spacing={{ base: 2, md: 4 }}
+        pr={{ base: 1, md: 3 }}
+        width={{ base: "100%", md: "auto" }}
+        alignItems={{ base: "flex-end", md: "center" }}
+      >
         <Menu.Root>
           <Menu.Trigger asChild>
-            <Button variant="outline" size="lg" colorPalette="green">
-              {selectedRegion === null ? "region" : selectedRegion}
+            <Button
+              variant="outline"
+              size={{ base: "sm", md: "lg" }}
+              colorPalette="green"
+              width={{ base: "100%", md: "auto" }}
+            >
+              {selectedRegion === null ? "Region" : selectedRegion}
             </Button>
           </Menu.Trigger>
           <Portal>
             <Menu.Positioner>
               <Menu.Content>
                 {props.regions.map((region, index) => (
-                  <Menu.Item
-                    key={index}
-                    onClick={() => {
-                      setRegion(region);
-                    }}
-                  >
+                  <Menu.Item key={index} onClick={() => setRegion(region)}>
                     {region}
                   </Menu.Item>
                 ))}
@@ -125,7 +136,12 @@ const Header = (props) => {
 
         <Menu.Root>
           <Menu.Trigger asChild>
-            <Button variant="outline" size="lg" colorPalette="green">
+            <Button
+              variant="outline"
+              size={{ base: "sm", md: "lg" }}
+              colorPalette="green"
+              width={{ base: "100%", md: "auto" }}
+            >
               {selectedLanguage === null ? "Language" : selectedLanguage}
             </Button>
           </Menu.Trigger>
@@ -133,12 +149,7 @@ const Header = (props) => {
             <Menu.Positioner>
               <Menu.Content>
                 {props.languages.map((language, index) => (
-                  <Menu.Item
-                    key={index}
-                    onClick={() => {
-                      setLanguage(language);
-                    }}
-                  >
+                  <Menu.Item key={index} onClick={() => setLanguage(language)}>
                     {language}
                   </Menu.Item>
                 ))}
@@ -147,7 +158,13 @@ const Header = (props) => {
           </Portal>
         </Menu.Root>
 
-        <Button variant="outline" size="lg" colorPalette="green" onClick={handleLogout}>
+        <Button
+          variant="outline"
+          size={{ base: "sm", md: "lg" }}
+          colorPalette="green"
+          width={{ base: "100%", md: "auto" }}
+          onClick={handleLogout}
+        >
           Log Out
         </Button>
       </Stack>
